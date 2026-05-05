@@ -1,0 +1,11 @@
+/_design_bundle/
+/uploads/
+.DS_Store
+Thumbs.db
+
+# WordPress (running via Docker; mounted volumes excluded)
+/wordpress/
+/wp-content/uploads/
+/wp-content/cache/
+/wp-content/upgrade/
+*.log

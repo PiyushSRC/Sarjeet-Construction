@@ -1,0 +1,21 @@
+{
+  "php.validate.enable": false,
+  "css.lint.vendorPrefix": "ignore",
+  "css.lint.compatibleVendorPrefixes": "ignore",
+  "css.lint.unknownProperties": "ignore",
+  "intelephense.environment.includePaths": [
+    "wp-content"
+  ],
+  "intelephense.stubs": [
+    "wordpress",
+    "Core",
+    "date",
+    "json",
+    "mysqli",
+    "openssl",
+    "pcre",
+    "session",
+    "standard",
+    "zlib"
+  ]
+}

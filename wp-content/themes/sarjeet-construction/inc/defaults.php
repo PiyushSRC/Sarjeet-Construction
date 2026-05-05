@@ -1,0 +1,335 @@
+<?php
+/**
+ * Default site content (real values pulled from sarjeet.com).
+ * Used when ACF is not installed or when an option/repeater is empty in admin.
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+function sarjeet_defaults(): array {
+
+	// Local theme image base — copied from sarjeet.com.
+	$img = function ( string $name ) {
+		return get_template_directory_uri() . '/assets/images/' . $name;
+	};
+
+	return [
+		'brand' => [
+			'name'    => 'Sarjeet Construction',
+			'short'   => 'Sarjeet',
+			'estd'    => '',
+			'tagline' => 'A specialised service provider in the engineering sector',
+		],
+		'contact' => [
+			'phone' => '',
+			'email' => 'sc@sarjeet.com',
+			'addr1' => '15, Aastha Bungalows, Near D-Mart Mall, Gangotri Haridarshan Road',
+			'addr2' => 'New Nikol, Ahmedabad – 382350, Gujarat, India',
+			'hours' => 'Mon–Fri 09:00–17:00 · Sat 10:00–14:00 · Sun closed',
+			'cin'   => '',
+		],
+		'hero' => [
+			'eyebrow'         => 'Sewerage · Water Supply · Urban Infrastructure',
+			'headline_html'   => 'Engineering<br><em>infrastructure</em><br>for India&rsquo;s cities.',
+			'subheadline'     => 'A specialised service provider in the engineering sector — sewerage and drainage, water supply and urban infrastructure delivered to government tender standards across Gujarat, Rajasthan, Madhya Pradesh, Maharashtra and Andhra Pradesh.',
+			'cta_primary'     => [ 'label' => 'View Projects', 'link' => '#projects' ],
+			'cta_secondary'   => [ 'label' => 'Contact Us', 'link' => '#contact' ],
+			'photo_url'       => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=65&fm=webp',
+			'photo_tag_top'   => 'AHMEDABAD · GUJARAT',
+			'photo_tag_bot'   => 'EPC · O&M · JV',
+			'compliance_line' => 'Empanelled with GWSSB · RUDSICO · RUIDP · NHAI · Indian Railways · Municipal Corporations',
+		],
+		'services' => [
+			[
+				'n'     => 'S/01',
+				'title' => 'Sewerage & Drainage',
+				'copy'  => 'Underground drainage networks, sewage treatment plants, lift stations and stabilisation ponds. Built across Gujarat, Rajasthan and Madhya Pradesh under GWSSB, RUDSICO and Municipal Corporation contracts.',
+				'tag'   => 'EPC · O&M · Trenchless',
+				'ico'   => 'sewer',
+			],
+			[
+				'n'     => 'S/02',
+				'title' => 'Water Supply Infrastructure',
+				'copy'  => 'Bulk transmission mains, water treatment plants and last-mile household connections — including 24×7 supply schemes funded by ADB and delivered under RUIDP Rajasthan.',
+				'tag'   => 'Bulk · Treatment · Distribution',
+				'ico'   => 'water',
+			],
+			[
+				'n'     => 'S/03',
+				'title' => 'Urban Infrastructure',
+				'copy'  => 'Civil works, roads, trenchless crossings under NHAI and Indian Railways, and supporting urban infrastructure — engineered under in-house quality and project-administration controls.',
+				'tag'   => 'Civil · Roads · Trenchless',
+				'ico'   => 'urban',
+			],
+		],
+		// 8 real projects from sarjeet.com — work-completed.php + work-ongoing.php + our-projects.php.
+		'projects' => [
+			[
+				'n'     => '01', 'slug' => 'underground-drainage-bayad',
+				'title' => 'Underground Drainage — Bayad',
+				'cat'   => 'Sewerage', 'loc' => 'Arvalli, Gujarat',
+				'value' => '₹19.18 Cr', 'year' => 'Completed',
+				'length'=> '~36 km', 'capacity' => '5.7 + 0.47 MLD',
+				'client'   => 'GWSSB Gujarat',
+				'partners' => [ 'Ankita Construction' ],
+				'desc'  => 'Underground drainage network for Bayad town with 36 km of sewer line, multiple pumping stations, waste-stabilisation ponds, and trenchless crossings under NHAI and Indian Railways.',
+				'specs' => [
+					[ 'label' => 'Sewer network',            'value' => '~36 km' ],
+					[ 'label' => 'Sub-pumping stations',     'value' => '3 nos.' ],
+					[ 'label' => 'Main pumping stations',    'value' => '2 nos.' ],
+					[ 'label' => 'Waste stabilisation pond', 'value' => '5.7 MLD + 0.47 MLD' ],
+					[ 'label' => 'Trenchless under NHAI',    'value' => '250 m' ],
+					[ 'label' => 'Trenchless under Railway', 'value' => '185 m' ],
+				],
+				'shape' => 'feat',
+				'img'   => 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=65&fm=webp',
+			],
+			[
+				'n'     => '02', 'slug' => 'sewer-project-nimbahera',
+				'title' => 'Sewer Project — Nimbahera',
+				'cat'   => 'Sewerage', 'loc' => 'Chittorgarh, Rajasthan',
+				'value' => '₹94.46 Cr', 'year' => 'Completed',
+				'length'=> '~84 km', 'capacity' => '7.5 MLD (3 STPs)',
+				'client'   => 'RUDSICO Rajasthan',
+				'partners' => [ 'DRA BIPL JV, Ahmedabad' ],
+				'desc'  => 'Sewer network for Nimbahera town with three sewage treatment plants and trenchless crossing under the Indian Railways line.',
+				'specs' => [
+					[ 'label' => 'Sewer network',           'value' => '~84 km' ],
+					[ 'label' => 'Sewage treatment plants', 'value' => '3 nos. (1.00 MLD · 2.00 MLD · 4.50 MLD)' ],
+					[ 'label' => 'Trenchless under Railway','value' => '55 m' ],
+				],
+				'shape' => 'tall',
+				'img'   => 'https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=1200&q=65&fm=webp',
+			],
+			[
+				'n'     => '03', 'slug' => 'sewer-project-kishangarh',
+				'title' => 'Sewer Project — Kishangarh',
+				'cat'   => 'Sewerage', 'loc' => 'Ajmer, Rajasthan',
+				'value' => '₹125.00 Cr', 'year' => 'Completed',
+				'length'=> '~135 km', 'capacity' => '10 MLD upgrade',
+				'client'   => 'RUDSICO Rajasthan',
+				'partners' => [ 'DRA BIPL JV, Ahmedabad' ],
+				'desc'  => 'One of the largest sewer mandates delivered: 135 km of network with a 10 MLD sewage treatment plant upgradation for Kishangarh.',
+				'specs' => [
+					[ 'label' => 'Sewer network',         'value' => '~135.00 km' ],
+					[ 'label' => 'Sewage treatment plant','value' => '1 no. (10 MLD upgradation)' ],
+				],
+				'shape' => 'wide',
+				'img'   => 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=65&fm=webp',
+			],
+			[
+				'n'     => '04', 'slug' => 'sewer-project-jaipur',
+				'title' => 'Sewer Project — Jaipur',
+				'cat'   => 'Sewerage', 'loc' => 'Jaipur, Rajasthan',
+				'value' => '₹37.34 Cr', 'year' => 'Completed',
+				'length'=> '~26 km', 'capacity' => '3.7 MLD (2 STPs)',
+				'client'   => 'RUDSICO Rajasthan',
+				'partners' => [ 'Ankita Construction, Ahmedabad (JV)' ],
+				'desc'  => '26 km sewer network with two sewage treatment plants for Jaipur city, delivered as a joint venture under the RUDSICO programme.',
+				'specs' => [
+					[ 'label' => 'Sewer network',           'value' => '~26.00 km' ],
+					[ 'label' => 'Sewage treatment plants', 'value' => '2 nos. (1.3 MLD · 2.4 MLD)' ],
+				],
+				'shape' => 'tall',
+				'img'   => 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200&q=65&fm=webp',
+			],
+			[
+				'n'     => '05', 'slug' => 'outfall-sewer-jaipur',
+				'title' => 'Outfall Sewer 900 mm — Jaipur',
+				'cat'   => 'Sewerage', 'loc' => 'Jaipur, Rajasthan',
+				'value' => '—', 'year' => 'Completed',
+				'length'=> '~1.2 km', 'capacity' => '900 mm dia.',
+				'client'   => 'Nagar Nigam Jaipur',
+				'partners' => [],
+				'desc'  => 'Outfall sewer network of 900 mm diameter, approximately 1.2 km long, delivered for Nagar Nigam Jaipur.',
+				'specs' => [
+					[ 'label' => 'Outfall sewer length', 'value' => '~1.2 km' ],
+					[ 'label' => 'Pipe diameter',        'value' => '900 mm' ],
+				],
+				'shape' => 'wide',
+				'img'   => 'https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?w=1200&q=65&fm=webp',
+			],
+			[
+				'n'     => '06', 'slug' => 'kolar-sewerage-stp-bhopal',
+				'title' => 'Kolar Sewerage & STP — Bhopal',
+				'cat'   => 'Sewerage', 'loc' => 'Bhopal, Madhya Pradesh',
+				'value' => '₹211.095 Cr', 'year' => 'Completed',
+				'length'=> '~26 km', 'capacity' => '52 MLD (2 STPs)',
+				'client'   => 'Municipal Corporation Bhopal',
+				'partners' => [ 'Ankita Construction, Ahmedabad (JV)', 'Navkar Construction' ],
+				'desc'  => 'Sewerage network and sewage treatment plants for Kolar town — 26 km of network plus a 32 MLD and a 20 MLD STP.',
+				'specs' => [
+					[ 'label' => 'Sewer network',           'value' => '~26.00 km' ],
+					[ 'label' => 'Sewage treatment plants', 'value' => '2 nos. (32 MLD · 20 MLD)' ],
+				],
+				'shape' => 'feat',
+				'img'   => 'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=1200&q=65&fm=webp',
+			],
+			[
+				'n'     => '07', 'slug' => 'water-supply-sewerage-banswara',
+				'title' => 'Water Supply & Sewerage — Banswara (ADB)',
+				'cat'   => 'Water Supply', 'loc' => 'Banswara, Rajasthan',
+				'value' => '₹320.746 Cr', 'year' => 'Ongoing',
+				'length'=> '349 km WS · 92 km sewer',
+				'capacity' => '9.25 MLD WTP · 9.6 MLD STP',
+				'client'   => 'RUIDP Rajasthan (ADB-funded)',
+				'partners' => [ 'BIPL', 'HP' ],
+				'desc'  => 'ADB-funded integrated water-supply and sewerage programme for Banswara — water network with WTP and 24×7 household connections, plus sewer network with SBR-based STP and trenchless crossings.',
+				'specs' => [
+					[ 'label' => 'Water supply pipeline',         'value' => '349 km' ],
+					[ 'label' => 'Water treatment plant',         'value' => '9.25 MLD' ],
+					[ 'label' => 'Household water connections (24×7)', 'value' => '23,600' ],
+					[ 'label' => 'Sewer network',                 'value' => '~92 km' ],
+					[ 'label' => 'STP (SBR technology)',          'value' => '9.60 MLD' ],
+					[ 'label' => 'Sub-pumping stations',          'value' => '2 nos.' ],
+					[ 'label' => 'Main pumping stations',         'value' => '1 no.' ],
+					[ 'label' => 'Trenchless work',               'value' => '6.00 km' ],
+				],
+				'shape' => 'feat',
+				'img'   => 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=1200&q=65&fm=webp',
+			],
+			[
+				'n'     => '08', 'slug' => 'sewer-network-rudsico',
+				'title' => 'Sewer Network & Connections — RUDSICO',
+				'cat'   => 'Sewerage', 'loc' => 'Rajasthan',
+				'value' => '₹196.00 Cr', 'year' => 'Ongoing',
+				'length'=> '152 km · 3.5 km trenchless',
+				'capacity' => '18,600 household connections',
+				'client'   => 'RUDSICO Rajasthan',
+				'partners' => [ 'BIPL (JV)' ],
+				'desc'  => 'Large-scale sewer programme: 152 km of network with one sub-pumping station, 3.5 km of trenchless work and 18,600 household sewer connections.',
+				'specs' => [
+					[ 'label' => 'Sewer network',               'value' => '~152 km' ],
+					[ 'label' => 'Sub-pumping stations',        'value' => '1 no.' ],
+					[ 'label' => 'Trenchless work',             'value' => '3.50 km' ],
+					[ 'label' => 'Household sewer connections', 'value' => '18,600' ],
+				],
+				'shape' => 'default',
+				'img'   => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=65&fm=webp',
+			],
+		],
+		// Stats derived from real project data (rounded sum of disclosed project values).
+		'stats' => [
+			'value'         => '1004',
+			'value_unit'    => 'Cr',
+			'value_label'   => 'Total disclosed project value',
+			'value_detail'  => 'Across GWSSB, RUDSICO, RUIDP, NHAI, Indian Railways and Municipal Corporation contracts.',
+			'projects'      => '8',
+			'projects_label'=> 'Headline projects delivered or ongoing',
+			'projects_detail' => 'Across Gujarat, Rajasthan, Madhya Pradesh, Maharashtra and Andhra Pradesh.',
+			'years'         => '12',
+			'years_label'   => 'Government clientele',
+			'years_detail'  => '12 government bodies, ministries and municipal corporations served — from Ahmedabad Municipal Corporation to RUIDP-ADB-funded programmes.',
+		],
+		// 12 real government clients with real logos (4×3 trust grid).
+		'clients' => [
+			[ 'name' => 'Ahmedabad Municipal Corporation',          'sub' => 'Gujarat',                'mark' => 'AMC',  'shape' => '', 'cat' => 'Municipal',       'logo' => $img( 'partners/partner1.png' ) ],
+			[ 'name' => 'Western Railway',                          'sub' => 'Indian Railways',        'mark' => 'WR',   'shape' => '', 'cat' => 'Central',         'logo' => $img( 'partners/partner2.png' ) ],
+			[ 'name' => 'Gujarat Water Supply & Sewerage Board',    'sub' => 'GWSSB',                  'mark' => 'GWS',  'shape' => '', 'cat' => 'State Board',     'logo' => $img( 'partners/partner3.png' ) ],
+			[ 'name' => 'Gujarat Urban Development Company',        'sub' => 'GUDC',                   'mark' => 'GUD',  'shape' => '', 'cat' => 'State Authority', 'logo' => $img( 'partners/partner4.png' ) ],
+			[ 'name' => 'Narmada Water Resources',                  'sub' => 'Government of Gujarat',  'mark' => 'NWR',  'shape' => '', 'cat' => 'State Dept',      'logo' => $img( 'partners/partner5.png' ) ],
+			[ 'name' => 'Surat Municipal Corporation',              'sub' => 'Gujarat',                'mark' => 'SMC',  'shape' => '', 'cat' => 'Municipal',       'logo' => $img( 'partners/partner6.png' ) ],
+			[ 'name' => 'Gujarat State Irrigation Department',      'sub' => 'Government of Gujarat',  'mark' => 'GSI',  'shape' => '', 'cat' => 'State Dept',      'logo' => $img( 'partners/partner7.png' ) ],
+			[ 'name' => 'Gandhinagar Urban Development Authority',  'sub' => 'GUDA',                   'mark' => 'GU',   'shape' => '', 'cat' => 'Authority',       'logo' => $img( 'partners/partner8.png' ) ],
+			[ 'name' => 'Ahmedabad Urban Development Authority',    'sub' => 'AUDA',                   'mark' => 'AUD',  'shape' => '', 'cat' => 'Authority',       'logo' => $img( 'partners/partner9.png' ) ],
+			[ 'name' => 'Gujarat Tourism Corporation Ltd.',         'sub' => 'GTCL',                   'mark' => 'GTC',  'shape' => '', 'cat' => 'State PSU',       'logo' => $img( 'partners/partner10.png' ) ],
+			[ 'name' => 'Sardar Sarovar Narmada Nigam Ltd.',        'sub' => 'SSNNL',                  'mark' => 'SSN',  'shape' => '', 'cat' => 'State PSU',       'logo' => $img( 'partners/partner11.png' ) ],
+			[ 'name' => 'Municipal Corporation Bhopal',             'sub' => 'Madhya Pradesh',         'mark' => 'BHP',  'shape' => '', 'cat' => 'Municipal',       'logo' => $img( 'partners/partner12.png' ) ],
+		],
+		'about' => [
+			'eyebrow'      => '01 — About Sarjeet',
+			'heading_html' => 'A specialized service<br>provider in the<br><em>engineering</em> sector.',
+			'body_html'    => '<p>Sarjeet Construction is a specialised service provider in the engineering sector. Our expertise lies in understanding the demands of each task and judiciously utilising quality raw materials and modern machinery to meet the specific requirements of the construction process. The use of advanced process methodology and the latest techniques enables us to ensure that every task delivered meets the standards specified in the tender process.</p><p>We engage only highly qualified and expert professionals to execute our projects — and that is how our work stands long-lasting, flawless and strong.</p><h3>Our methodology to achieve the goal</h3><ul><li>Choice of technology and construction method</li><li>Site investigation and laboratory tests</li><li>Planning, design and engineering services</li><li>Control of construction management</li><li>Implementation of contract clauses &amp; conditions</li><li>Project administration</li><li>Procurement and operation of equipment</li><li>Cost control and control of material strength</li><li>Time-schedule control with the CPM-PERT system</li><li>Construction processes and operations</li></ul>',
+			'photo_url'    => 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=65&fm=webp',
+			'photo_label_top' => 'AHMEDABAD HQ · NEW NIKOL',
+			'photo_label_bot' => 'GUJARAT',
+			'credentials' => [
+				[ 'title' => 'Capabilities',       'desc' => 'Concrete · Machinery · Metals · Furnishing · Civil · Mechanical · Electrical — full multidisciplinary execution under one roof.' ],
+				[ 'title' => 'Quality Management', 'desc' => 'Inspection of equipment and product prior to delivery, documented performance & guarantee testing, and control of material strength on every project.' ],
+				[ 'title' => 'HSE',                'desc' => 'Health, safety and environment integrated into every site — embedded across concrete, civil, mechanical and electrical works.' ],
+				[ 'title' => 'Lifecycle Support',  'desc' => 'Operational maintenance for completed projects, full documentation handover, and post-completion guarantee testing.' ],
+			],
+		],
+		'cta' => [
+			'eyebrow'      => '06 — Get in touch',
+			'heading_html' => 'Start your<br><em>project</em> today.',
+			'button_label' => 'Contact Us',
+			'button_link'  => '/?view=contact',
+		],
+		'trust' => [
+			'eyebrow'      => '05 — Government Clientele',
+			'heading_html' => 'Trusted by Boards,<br>Authorities &amp; <em>Municipal</em> Corporations.',
+			'subheading'   => 'Sarjeet Construction has delivered tendered infrastructure for state water boards, urban development authorities, irrigation departments, ADB-funded programmes and municipal corporations across India.',
+			'foot'         => 'EMPANELLED · GWSSB · RUDSICO · RUIDP · NHAI · INDIAN RAILWAYS · AUDA · GUDA · MUNICIPAL CORPORATIONS',
+		],
+
+		// Legal pages — industry-standard structure for B2G construction firm.
+		// Last_updated should be reviewed/updated whenever content changes.
+		'legal' => [
+			'last_updated' => 'May 2026',
+			'company'      => 'Sarjeet Construction Pvt. Ltd.',
+			'jurisdiction' => 'Ahmedabad, Gujarat',
+
+			'privacy' => [
+				'title'   => 'Privacy Policy',
+				'lede'    => 'Sarjeet Construction Pvt. Ltd. is committed to protecting your privacy and ensuring transparency in how your data is handled.',
+				'sections' => [
+					[ 'h' => '1. Information we collect', 'body' => '<p>We may collect the following types of information:</p><ul><li><strong>Personal details:</strong> name, email address, phone number, organisation</li><li><strong>Project-related information:</strong> project type, location, scope, tender references</li><li><strong>Technical data:</strong> IP address, browser type, device information</li><li><strong>Usage data:</strong> pages visited, time spent on the website</li></ul>' ],
+					[ 'h' => '2. How we use your information', 'body' => '<p>Your information may be used to:</p><ul><li>Respond to inquiries and provide project consultations or quotations</li><li>Improve our services, website performance, and user experience</li><li>Communicate updates, offers, or relevant information</li><li>Maintain internal records and business analytics</li></ul>' ],
+					[ 'h' => '3. Cookies and tracking technologies', 'body' => '<p>We use cookies and similar technologies to:</p><ul><li>Analyze website traffic via tools like Google Analytics</li><li>Enhance website functionality and user experience</li><li>Track marketing campaign effectiveness</li></ul><p>See our <a href="/?view=cookies">Cookie Policy</a> for full details.</p>' ],
+					[ 'h' => '4. Data sharing and disclosure', 'body' => '<p>We do not sell or rent your personal data. Information may be shared with:</p><ul><li>Trusted service providers (hosting, analytics tools)</li><li>Legal authorities, if required by law</li></ul>' ],
+					[ 'h' => '5. Data security', 'body' => '<p>We implement appropriate technical and organisational measures to protect your data from unauthorized access, misuse, or disclosure.</p>' ],
+					[ 'h' => '6. Data retention', 'body' => '<p>We retain personal information only for as long as necessary to fulfill the purposes outlined in this policy.</p>' ],
+					[ 'h' => '7. Your rights', 'body' => '<p>You may request access, correction, or deletion of your personal data by contacting us at the details below.</p>' ],
+					[ 'h' => '8. Third-party links', 'body' => '<p>Our website may contain links to third-party websites. We are not responsible for their privacy practices.</p>' ],
+					[ 'h' => '9. Updates to this policy', 'body' => '<p>We may update this policy from time to time. Material changes will be posted on this page with a revised &ldquo;last updated&rdquo; date.</p>' ],
+					[ 'h' => '10. Contact us', 'body' => '<p>For any privacy-related concerns, contact:</p><p><strong>Email:</strong> sc@sarjeet.com<br><strong>Address:</strong> 15, Aastha Bungalows, Near D-Mart Mall, Gangotri Haridarshan Road, New Nikol, Ahmedabad &ndash; 382350, Gujarat, India.</p>' ],
+				],
+			],
+
+			'terms' => [
+				'title'   => 'Terms & Conditions',
+				'lede'    => 'By accessing and using this website, you agree to the following terms.',
+				'sections' => [
+					[ 'h' => '1. Use of website', 'body' => '<p>This website is intended for informational purposes related to our construction services. Users agree to use it lawfully and responsibly.</p>' ],
+					[ 'h' => '2. Intellectual property rights', 'body' => '<p>All content including text, images, graphics, logos, and designs are owned by Sarjeet Construction Pvt. Ltd. and protected under applicable copyright laws.</p>' ],
+					[ 'h' => '3. Service information', 'body' => '<p>Descriptions of services, project timelines, and pricing (if mentioned) are indicative and subject to change based on project scope and site conditions.</p>' ],
+					[ 'h' => '4. Quotations and agreements', 'body' => '<p>Any estimates or quotations provided through the website or inquiry forms are non-binding until confirmed through a formal agreement.</p>' ],
+					[ 'h' => '5. User conduct', 'body' => '<p>Users must not:</p><ul><li>Attempt to gain unauthorized access to the website</li><li>Disrupt website functionality</li><li>Use content for unlawful purposes</li></ul>' ],
+					[ 'h' => '6. Limitation of liability', 'body' => '<p>We are not liable for any direct, indirect, or incidental damages arising from the use of this website.</p>' ],
+					[ 'h' => '7. Third-party content', 'body' => '<p>We are not responsible for content or services provided by external websites linked from our platform.</p>' ],
+					[ 'h' => '8. Termination', 'body' => '<p>We reserve the right to restrict or terminate access to the website without notice if these terms are violated.</p>' ],
+					[ 'h' => '9. Governing law', 'body' => '<p>These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts at Ahmedabad, Gujarat.</p>' ],
+					[ 'h' => '10. Changes to terms', 'body' => '<p>We may revise these terms at any time without prior notice. Continued use of the website constitutes acceptance of the revised terms.</p>' ],
+				],
+			],
+
+			'disclaimer' => [
+				'title'   => 'Disclaimer',
+				'lede'    => 'The information provided on this website is for general informational purposes only.',
+				'sections' => [
+					[ 'h' => '1. Project estimates', 'body' => '<p>Any cost estimates, budgets, or timelines mentioned are approximate and subject to change based on site conditions, material availability, labour, and project scope.</p>' ],
+					[ 'h' => '2. Design & visual representation', 'body' => '<p>Images, renders, plans, and design concepts are for illustrative purposes only and may differ from actual execution.</p>' ],
+					[ 'h' => '3. Technical accuracy', 'body' => '<p>While we strive to keep information accurate and up to date, we make no warranties regarding completeness, reliability, or accuracy.</p>' ],
+					[ 'h' => '4. External factors', 'body' => '<p>Project timelines and outcomes may be affected by factors beyond our control, including weather, regulatory approvals, and supply chain issues.</p>' ],
+					[ 'h' => '5. Professional advice', 'body' => '<p>Content on this website should not be considered as legal, financial, architectural, or engineering advice.</p>' ],
+					[ 'h' => '6. External links disclaimer', 'body' => '<p>We are not responsible for the content or reliability of third-party websites linked on this platform.</p>' ],
+					[ 'h' => '7. Limitation of liability', 'body' => '<p>Under no circumstances shall Sarjeet Construction Pvt. Ltd. be held liable for any loss or damage arising from reliance on the information provided on this website.</p>' ],
+				],
+			],
+
+			'cookies' => [
+				'title'   => 'Cookie Policy',
+				'lede'    => 'This website uses cookies to enhance your browsing experience.',
+				'sections' => [
+					[ 'h' => '1. What are cookies?', 'body' => '<p>Cookies are small data files stored on your device when you visit a website. They help improve functionality and user experience.</p>' ],
+					[ 'h' => '2. Types of cookies we use', 'body' => '<ul><li><strong>Essential cookies:</strong> required for basic website functionality</li><li><strong>Analytics cookies:</strong> help us understand how visitors interact with our website (e.g. Google Analytics)</li><li><strong>Marketing cookies:</strong> used for advertising and tracking campaign performance</li></ul>' ],
+					[ 'h' => '3. How we use cookies', 'body' => '<ul><li>To analyze traffic and user behaviour</li><li>To improve website performance and usability</li><li>To personalise content and advertisements</li></ul>' ],
+					[ 'h' => '4. Third-party cookies', 'body' => '<p>We may use third-party services such as Google and Meta (Facebook) that place cookies on your device.</p>' ],
+					[ 'h' => '5. Managing cookies', 'body' => '<p>You can control or disable cookies through your browser settings. Note that some website features may not function properly if cookies are disabled.</p>' ],
+					[ 'h' => '6. Consent', 'body' => '<p>By continuing to browse our website, you consent to our use of cookies as described in this policy.</p>' ],
+					[ 'h' => '7. Updates to this policy', 'body' => '<p>We may update this Cookie Policy periodically. The latest version will always be available on this page.</p>' ],
+				],
+			],
+		],
+	];
+}

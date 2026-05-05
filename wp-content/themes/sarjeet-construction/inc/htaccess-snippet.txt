@@ -1,0 +1,70 @@
+# =============================================================================
+# Sarjeet Construction — production .htaccess additions
+# =============================================================================
+# Copy these rules into your production .htaccess (above the "# BEGIN WordPress"
+# block) AFTER deploying. Not needed locally — Docker dev environment doesn't
+# use them.
+#
+# What they do:
+#   • Long cache lifetimes (1 year) for static assets — fixes Lighthouse
+#     "Use efficient cache lifetimes" finding (~25 KiB savings)
+#   • Hides server signature from response headers
+#   • Forces cache headers via mod_headers as a fallback
+# =============================================================================
+
+# ---- Long cache lifetimes for static assets -------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                 "access plus 1 year"
+  ExpiresByType text/javascript          "access plus 1 year"
+  ExpiresByType application/javascript   "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+  ExpiresByType image/webp               "access plus 1 year"
+  ExpiresByType image/png                "access plus 1 year"
+  ExpiresByType image/jpeg               "access plus 1 year"
+  ExpiresByType image/jpg                "access plus 1 year"
+  ExpiresByType image/svg+xml            "access plus 1 year"
+  ExpiresByType image/x-icon             "access plus 1 year"
+  ExpiresByType font/woff                "access plus 1 year"
+  ExpiresByType font/woff2               "access plus 1 year"
+  ExpiresByType application/font-woff    "access plus 1 year"
+  ExpiresByType application/font-woff2   "access plus 1 year"
+</IfModule>
+
+# ---- Cache-Control headers as fallback -----------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|webp|png|jpg|jpeg|svg|ico|woff|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML should always revalidate (so content updates show)
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ---- Compression (gzip) — should already be on at most managed hosts ------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/css text/javascript text/html text/plain
+  AddOutputFilterByType DEFLATE application/javascript application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+</IfModule>
+
+# ---- Hide server fingerprinting -------------------------------------------
+ServerSignature Off
+# ServerTokens Prod   # Set in main Apache config; ask host support if not set
+
+# ---- Block access to sensitive files --------------------------------------
+<FilesMatch "^(wp-config\.php|readme\.html|license\.txt|\.htaccess|composer\.json|composer\.lock|package\.json|package-lock\.json|\.env|\.git.*)$">
+  Require all denied
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes
+
+# Block PHP execution in /uploads (in case of malicious upload)
+<Directory "wp-content/uploads">
+  <FilesMatch "\.php$">
+    Require all denied
+  </FilesMatch>
+</Directory>

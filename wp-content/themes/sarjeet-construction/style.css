@@ -1,0 +1,14 @@
+/*
+Theme Name: Sarjeet Construction
+Theme URI: https://sarjeetconstruction.in
+Author: Sarjeet Construction
+Author URI: https://sarjeetconstruction.in
+Description: Custom theme for Sarjeet Construction — sewerage, water and urban infrastructure. Editorial white + dark blue, ported from the Claude Design prototype.
+Version: 1.0.0
+Requires at least: 6.4
+Requires PHP: 8.1
+License: Proprietary
+Text Domain: sarjeet
+*/
+
+/* The full design system lives in assets/css/styles.css and is enqueued by inc/enqueue.php. */
