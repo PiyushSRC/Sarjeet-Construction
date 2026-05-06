@@ -24,3 +24,11 @@ add_action( 'init', function () {
 	add_image_size( 'sarjeet_card', 1200, 900, true );
 	add_image_size( 'sarjeet_hero', 1920, 1280, true );
 } );
+
+add_action( 'wp_head', function () {
+	if ( has_site_icon() ) return;
+	$base = get_template_directory_uri() . '/assets/images';
+	echo '<link rel="icon" type="image/png" sizes="32x32" href="' . esc_url( $base . '/favicon-32.png' ) . '" />' . "\n";
+	echo '<link rel="icon" type="image/png" sizes="192x192" href="' . esc_url( $base . '/favicon.png' ) . '" />' . "\n";
+	echo '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url( $base . '/apple-touch-icon.png' ) . '" />' . "\n";
+}, 1 );

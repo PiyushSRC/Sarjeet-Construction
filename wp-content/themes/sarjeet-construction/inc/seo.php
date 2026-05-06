@@ -78,7 +78,7 @@ function sarjeet_seo_context(): array {
 	// Front page (or unknown / fallback)
 	return [
 		'type'        => 'home',
-		'title'       => $brand . ' — Sewerage, Water Supply & Urban Infrastructure',
+		'title'       => $brand,
 		'description' => sarjeet_field( 'hero.subheadline' ) ?: $tagline,
 		'url'         => home_url( '/' ),
 		'image'       => sarjeet_field( 'hero.photo_url' ) ?: '',
@@ -138,7 +138,7 @@ add_action( 'wp_head', function () {
 	$phone   = sarjeet_field( 'contact.phone' );
 	$addr1   = sarjeet_field( 'contact.addr1' );
 	$addr2   = sarjeet_field( 'contact.addr2' );
-	$logo    = get_template_directory_uri() . '/assets/images/logo.png'; // placeholder; favicon/logo not yet shipped
+	$logo    = get_template_directory_uri() . '/assets/images/logo.png';
 	$home    = home_url( '/' );
 
 	$organization = [
@@ -147,6 +147,7 @@ add_action( 'wp_head', function () {
 		'@id'      => $home . '#organization',
 		'name'     => $brand,
 		'url'      => $home,
+		'logo'     => $logo,
 		'description' => 'Civil engineering for civic systems — sewerage, water supply and urban infrastructure for India\'s growing cities.',
 	];
 	if ( $email ) $organization['email'] = $email;

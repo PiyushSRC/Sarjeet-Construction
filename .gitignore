@@ -9,3 +9,22 @@ Thumbs.db
 /wp-content/cache/
 /wp-content/upgrade/
 *.log
+
+# Build artifacts
+/sarjeet-construction.zip
+/theme-fix.zip
+/theme-fix/
+/hero-images.zip
+/hero-images/
+
+# Deployment helper copies (real source lives in wp-content/themes/...)
+/defaults.php
+/hero.php
+
+# Claude plan notes
+/.claude/
+
+# Source assets (raw PNGs at project root — processed copies live in theme)
+/assets/Hero Image.png
+/assets/Logo*.png
+/assets/SVG*.png

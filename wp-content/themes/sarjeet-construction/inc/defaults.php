@@ -30,10 +30,10 @@ function sarjeet_defaults(): array {
 		'hero' => [
 			'eyebrow'         => 'Sewerage · Water Supply · Urban Infrastructure',
 			'headline_html'   => 'Engineering<br><em>infrastructure</em><br>for India&rsquo;s cities.',
-			'subheadline'     => 'A specialised service provider in the engineering sector — sewerage and drainage, water supply and urban infrastructure delivered to government tender standards across Gujarat, Rajasthan, Madhya Pradesh, Maharashtra and Andhra Pradesh.',
+			'subheadline'     => 'A specialised service provider in the engineering sector. Sewerage and drainage, water supply and urban infrastructure delivered to government tender standards across Gujarat, Rajasthan, Madhya Pradesh, Maharashtra and Andhra Pradesh.',
 			'cta_primary'     => [ 'label' => 'View Projects', 'link' => '#projects' ],
 			'cta_secondary'   => [ 'label' => 'Contact Us', 'link' => '#contact' ],
-			'photo_url'       => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=65&fm=webp',
+			'photo_url'       => get_template_directory_uri() . '/assets/images/hero-1200.jpg',
 			'photo_tag_top'   => 'AHMEDABAD · GUJARAT',
 			'photo_tag_bot'   => 'EPC · O&M · JV',
 			'compliance_line' => 'Empanelled with GWSSB · RUDSICO · RUIDP · NHAI · Indian Railways · Municipal Corporations',

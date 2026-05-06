@@ -11,17 +11,23 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	<link rel="dns-prefetch" href="https://fonts.googleapis.com">
 	<link rel="prefetch" href="<?php echo esc_url( home_url( '/?view=contact' ) ); ?>">
 	<?php
-	// Preload the hero image (LCP element) on the front page only, with the smallest viable size.
+	// Preload the hero image (LCP element) on the front page only.
+	// Supports both Unsplash-style (?w= query params) and local theme files (filename suffix).
 	if ( is_front_page() && ( $_hero = sarjeet_field( 'hero.photo_url' ) ) ) :
-		$_hero_base = strtok( $_hero, '?' );
-		$_hero_pre  = $_hero_base . '?w=1200&q=55&fm=webp';
-		$_hero_600  = $_hero_base . '?w=600&q=55&fm=webp';
-		$_hero_900  = $_hero_base . '?w=900&q=55&fm=webp';
+		$_hero_base  = strtok( $_hero, '?' );
+		$_hero_local = ( strpos( $_hero, '?' ) === false );
+		if ( $_hero_local ) {
+			$_hero_ext  = pathinfo( $_hero_base, PATHINFO_EXTENSION );
+			$_hero_stem = preg_replace( '/-\d+$/', '', preg_replace( '/\.[^.]+$/', '', $_hero_base ) );
+			$_hero_make = function ( $w ) use ( $_hero_stem, $_hero_ext ) { return $_hero_stem . '-' . $w . '.' . $_hero_ext; };
+		} else {
+			$_hero_make = function ( $w ) use ( $_hero_base ) { return $_hero_base . '?w=' . $w . '&q=55&fm=webp'; };
+		}
 		?>
 		<link rel="preload" as="image"
-			href="<?php echo esc_url( $_hero_pre ); ?>"
-			imagesrcset="<?php echo esc_attr( $_hero_600 . ' 600w, ' . $_hero_900 . ' 900w, ' . $_hero_pre . ' 1200w' ); ?>"
-			imagesizes="(max-width: 768px) 55vw, (max-width: 960px) 55vw, 50vw"
+			href="<?php echo esc_url( $_hero_make( 1200 ) ); ?>"
+			imagesrcset="<?php echo esc_attr( $_hero_make( 600 ) . ' 600w, ' . $_hero_make( 900 ) . ' 900w, ' . $_hero_make( 1200 ) . ' 1200w, ' . $_hero_make( 1920 ) . ' 1920w' ); ?>"
+			imagesizes="100vw"
 			fetchpriority="high">
 	<?php endif; ?>
 	<?php wp_head(); ?>
@@ -37,8 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <header class="header scrolled" id="site-header" data-scrolled="true">
 	<div class="header-row">
 		<a href="<?php echo esc_url( home_url( '/#hero' ) ); ?>" class="logo" aria-label="<?php echo esc_attr( sarjeet_field( 'brand.name' ) ); ?>">
-			<span class="logo-mark">SC</span>
-			<span class="logo-word">Sarjeet<span class="logo-suf">Construction</span></span>
+			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="<?php echo esc_attr( sarjeet_field( 'brand.name' ) ); ?>" class="logo-img" width="240" height="68" decoding="async" />
 		</a>
 
 		<nav class="nav" aria-label="Primary">

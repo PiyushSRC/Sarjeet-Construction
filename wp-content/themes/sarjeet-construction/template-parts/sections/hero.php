@@ -20,21 +20,29 @@ $compl     = sarjeet_field( 'hero.compliance_line' );
 			<p class="hero-sub"><?php echo esc_html( $sub ); ?></p>
 			<div class="hero-ctas">
 				<a href="<?php echo esc_url( $cta_p['link'] ?? '#projects' ); ?>" class="btn"><?php echo esc_html( $cta_p['label'] ?? 'View Projects' ); ?> <span class="arrow">→</span></a>
-				<a href="<?php echo esc_url( $cta_s['link'] ?? '#contact' ); ?>" class="btn btn--ghost"><?php echo esc_html( $cta_s['label'] ?? 'Contact Us' ); ?> <span class="arrow">→</span></a>
 			</div>
 		</div>
 		<div class="hero-photo">
 			<?php
-				// Build a responsive srcset by stripping any existing query and re-attaching width-specific params
+				// Build a responsive srcset. Two sources supported:
+				//  - Unsplash-style: keep query params, vary `w` per size.
+				//  - Local theme files: use filename suffix pattern hero-NNNN.ext.
 				$_photo_base = strtok( $photo, '?' );
-				$_make = function ( $w ) use ( $_photo_base ) { return $_photo_base . '?w=' . $w . '&q=55&fm=webp'; };
+				$_is_local   = ( strpos( $photo, '?' ) === false );
+				if ( $_is_local ) {
+					$_ext  = pathinfo( $_photo_base, PATHINFO_EXTENSION );
+					$_stem = preg_replace( '/-\d+\.[^.]+$/', '', $_photo_base );
+					$_make = function ( $w ) use ( $_stem, $_ext ) { return $_stem . '-' . $w . '.' . $_ext; };
+				} else {
+					$_make = function ( $w ) use ( $_photo_base ) { return $_photo_base . '?w=' . $w . '&q=55&fm=webp'; };
+				}
 				?>
 				<img
 					src="<?php echo esc_url( $_make( 1200 ) ); ?>"
-					srcset="<?php echo esc_url( $_make( 600 ) ); ?> 600w, <?php echo esc_url( $_make( 900 ) ); ?> 900w, <?php echo esc_url( $_make( 1200 ) ); ?> 1200w"
-					sizes="(max-width: 768px) 55vw, (max-width: 960px) 55vw, 50vw"
-					alt="<?php esc_attr_e( 'Sarjeet engineers on a sewerage and infrastructure construction site', 'sarjeet' ); ?>"
-					width="800" height="1000" decoding="async" loading="eager" fetchpriority="high" />
+					srcset="<?php echo esc_url( $_make( 600 ) ); ?> 600w, <?php echo esc_url( $_make( 900 ) ); ?> 900w, <?php echo esc_url( $_make( 1200 ) ); ?> 1200w, <?php echo esc_url( $_make( 1920 ) ); ?> 1920w"
+					sizes="100vw"
+					alt="<?php esc_attr_e( 'Civil engineering construction site — concrete pillars, drainage pipes and workers building urban infrastructure', 'sarjeet' ); ?>"
+					width="1920" height="964" decoding="async" loading="eager" fetchpriority="high" />
 			<div class="photo-tag">
 				<span><?php echo esc_html( $tag_top ); ?></span>
 				<span><?php echo esc_html( $tag_bot ); ?></span>
