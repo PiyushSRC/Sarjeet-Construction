@@ -554,38 +554,81 @@
 			if (e.key === 'ArrowRight') { show(index + 1); restartFresh(); }
 		});
 
-		// Touch swipe — drag left to advance, right to go back.
+		// Touch swipe — finger drag follows the track in real time, snaps on release.
 		let touchStartX = 0;
 		let touchStartY = 0;
 		let touchActive = false;
-		const SWIPE_THRESHOLD = 40;       // px the finger must travel horizontally
-		const SWIPE_LOCK_RATIO = 1.4;     // require horizontal travel > vertical × this
+		let isDragging = false;
+		let baseTranslate = 0;
+		const SWIPE_THRESHOLD = 40;       // px the finger must travel horizontally to advance one slide
+		const DRAG_LOCK_THRESHOLD = 8;    // px before we commit to horizontal drag (vs. vertical scroll)
+
+		const readTrackTranslateX = () => {
+			const cs = getComputedStyle(track).transform;
+			if (!cs || cs === 'none') return 0;
+			const m = cs.match(/matrix\(([^)]+)\)/);
+			if (!m) return 0;
+			const parts = m[1].split(',').map((s) => parseFloat(s.trim()));
+			return parts.length >= 6 && !isNaN(parts[4]) ? parts[4] : 0;
+		};
 
 		carousel.addEventListener('touchstart', (e) => {
 			if (e.touches.length !== 1) return;
 			touchStartX = e.touches[0].clientX;
 			touchStartY = e.touches[0].clientY;
 			touchActive = true;
+			isDragging = false;
+			baseTranslate = readTrackTranslateX();
 			stop(); // pause autoplay while interacting
+		}, { passive: true });
+
+		carousel.addEventListener('touchmove', (e) => {
+			if (!touchActive || e.touches.length !== 1) return;
+			const t = e.touches[0];
+			const dx = t.clientX - touchStartX;
+			const dy = t.clientY - touchStartY;
+			// Lock to horizontal drag once intent is clear; don't fight vertical scroll.
+			if (!isDragging) {
+				if (Math.abs(dx) > DRAG_LOCK_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+					isDragging = true;
+					track.style.transition = 'none'; // disable CSS transition during drag
+				} else if (Math.abs(dy) > DRAG_LOCK_THRESHOLD) {
+					// Vertical scroll wins; abandon drag for this gesture.
+					touchActive = false;
+					start();
+					return;
+				}
+			}
+			if (isDragging) {
+				track.style.transform = 'translateX(' + (baseTranslate + dx) + 'px)';
+			}
 		}, { passive: true });
 
 		carousel.addEventListener('touchend', (e) => {
 			if (!touchActive) return;
 			touchActive = false;
+			track.style.transition = ''; // re-enable CSS transition for the snap animation
+			void track.offsetWidth;       // force reflow so the next transform change is animated, not batched
 			const t = e.changedTouches && e.changedTouches[0];
-			if (!t) { start(); return; }
+			if (!t || !isDragging) { start(); return; }
 			const dx = t.clientX - touchStartX;
-			const dy = t.clientY - touchStartY;
-			if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy) * SWIPE_LOCK_RATIO) {
+			if (Math.abs(dx) >= SWIPE_THRESHOLD) {
 				if (dx < 0) { show(index + 1); restartFresh(); }
 				else        { show(index - 1); restartFresh(); }
 			} else {
+				show(index); // snap back to current slide
 				start();
 			}
 		}, { passive: true });
 
 		carousel.addEventListener('touchcancel', () => {
-			if (touchActive) { touchActive = false; start(); }
+			if (touchActive) {
+				touchActive = false;
+				track.style.transition = '';
+				void track.offsetWidth;
+				show(index);
+				start();
+			}
 		}, { passive: true });
 	}
 

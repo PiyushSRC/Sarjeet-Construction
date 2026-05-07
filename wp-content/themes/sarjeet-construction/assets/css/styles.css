@@ -964,20 +964,14 @@ textarea[aria-invalid="true"] {
   padding: 18px var(--pad-x) 22px;
   color: rgba(255, 255, 255, 0.92);
 }
-.hero[data-variant="full"] .hero-foot .scroll-cue {
-  color: rgba(255, 255, 255, 0.92);
-}
-.hero[data-variant="full"] .hero-foot .label-num {
-  color: rgba(255, 255, 255, 0.85);
-}
+.hero[data-variant="full"] .hero-foot__row { display: none; }
 .hero[data-variant="full"] .hero-foot__compliance {
   color: rgba(255, 255, 255, 0.78);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 0;
+  padding-top: 0;
 }
+.hero[data-variant="full"] .hero-foot { padding-top: 12px; padding-bottom: 14px; }
 @media (max-height: 800px) {
-  .hero[data-variant="full"] .hero-foot__row { display: none; }
-  .hero[data-variant="full"] .hero-foot__compliance { border-top: 0; padding-top: 0; }
-  .hero[data-variant="full"] .hero-foot { padding-top: 12px; padding-bottom: 14px; }
   .hero[data-variant="full"] .hero-text { padding-bottom: clamp(90px, 10vw, 130px); }
 }
 .hero[data-variant="full"] {
@@ -1654,9 +1648,7 @@ textarea[aria-invalid="true"] {
   justify-content: center;
   gap: 10px;
   text-align: center;
-  filter: grayscale(1);
-  opacity: 0.78;
-  transition: transform 0.5s var(--ease), filter 0.4s var(--ease), opacity 0.4s var(--ease);
+  transition: transform 0.5s var(--ease);
 }
 .trust-logo .mark {
   display: grid;
@@ -2394,6 +2386,7 @@ textarea[aria-invalid="true"] {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  padding-right: 28px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--line-soft);
 }
@@ -2670,10 +2663,10 @@ textarea[aria-invalid="true"] {
 }
 .proj-view-all__btn { font-size: 14px; }
 
-/* Responsive — only collapse to 1 card on small phones */
+/* Responsive — show 1 card with a peek of the next on small phones (sliding-panel feel) */
 @media (max-width: 540px) {
-  .proj-carousel__track { padding: 16px; gap: 16px; }
-  .proj-slide { flex: 0 0 100%; }
+  .proj-carousel__track { padding: 14px; gap: 12px; }
+  .proj-slide { flex: 0 0 88%; }
 }
 
 /* ============================================================ */
@@ -3957,6 +3950,21 @@ p, .lede, .proj-slide__desc, .proj-card-info__desc, .stat-detail,
   .section-head h2 { font-size: clamp(28px, 8vw, 44px); }
   .proj-slide { padding: 16px; }
   .stats .stat { padding: 22px 0; }
+}
+
+/* Phones (≤540 px) — default hero-h clamp min is 54px which makes long words like "infrastructure" overflow on small phones. Drop the min so it scales down properly. */
+@media (max-width: 540px) {
+  .hero-h { font-size: clamp(36px, 11vw, 56px); }
+}
+
+/* Tablet portrait (600–960 px) — pair project cards in a 2-col grid instead of letting them all stack full-width. Restores the editorial rhythm on iPad portrait. */
+@media (min-width: 600px) and (max-width: 960px) {
+  .proj-card,
+  .proj-card.feat,
+  .proj-card.wide,
+  .proj-card.tall {
+    grid-column: span 6;
+  }
 }
 
 /* Mobile landscape (e.g., 812 × 375) — drawer top padding pushed nav off-screen */

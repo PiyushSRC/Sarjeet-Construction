@@ -57,7 +57,6 @@ add_filter( 'xmlrpc_enabled', '__return_false' );
 
 /**
  * Security: HTTP response headers (defends against clickjacking, MIME-sniffing, referrer leaks).
- * HSTS is commented out — uncomment after HTTPS is verified working in production.
  */
 add_action( 'send_headers', function () {
 	if ( is_admin() ) return;
@@ -68,7 +67,9 @@ add_action( 'send_headers', function () {
 	// Strip server fingerprinting headers (PHP version, REST + shortlink discovery)
 	header_remove( 'X-Powered-By' );
 	header_remove( 'Link' );
-	// header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
+	if ( is_ssl() ) {
+		header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
+	}
 } );
 
 /**
